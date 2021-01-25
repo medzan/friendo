@@ -1,0 +1,26 @@
+<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
+  <div class="container-fluid">
+    <div class="header-body">
+      <!-- Card stats -->
+     
+    </div>
+  </div>
+</div>
+<!-- Page content -->
+<div class="container-fluid mt--7">
+  <div class="row">
+    <div class="col">
+      <div class="card shadow border-0">
+       <agm-map [latitude]="lat" [longitude]="lng">
+          <agm-marker [latitude]="lat" [longitude]="lng" label="test" title="title"></agm-marker>
+                    <agm-marker [latitude]="lat2" [longitude]="lng2">
+                      <agm-info-window [disableAutoPan]="false" [isOpen]="true">
+  Hi, this is the content of the <strong>info window</strong>
+</agm-info-window>
+                    </agm-marker>
+
+        </agm-map>
+      </div>
+    </div>
+  </div>
+</div>

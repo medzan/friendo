@@ -1,34 +1,41 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { UserComponent } from './user/user.component';
-import { HttpClientModule } from '@angular/common/http';
-import { AddUserComponent } from './add-user/add-user.component';
 import { FormsModule } from '@angular/forms';
-import { HeaderComponent } from './header/header.component';
-import { FooterComponent } from './footer/footer.component';
-import { LoginComponent } from './login/login.component';
-import { LogoutComponent } from './logout/logout.component';
+import { HttpClientModule,HTTP_INTERCEPTORS  } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
 
+import { AppComponent } from './app.component';
+import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
+import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
+
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
+import { AppRoutingModule } from './app.routing';
+import { ComponentsModule } from './components/components.module';
+import { AgmCoreModule } from '@agm/core';
+import {AdminModule} from './admin/admin.module'
+import {BasicAuthInterceptor} from '@app/helpers/basic-auth.interceptor'
 @NgModule({
+  imports: [
+    BrowserAnimationsModule,
+    FormsModule,
+    HttpClientModule,
+    ComponentsModule,
+    NgbModule,
+    RouterModule,
+    AppRoutingModule,
+    AdminModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyCi-RtDvxei2L-CA6PctZK2w9A-zx8Xgmg'
+    })
+  ],
   declarations: [
     AppComponent,
-    UserComponent,
-    AddUserComponent,
-    HeaderComponent,
-    FooterComponent,
-    LoginComponent,
-    LogoutComponent
+    AdminLayoutComponent,
+    AuthLayoutComponent
+
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    FormsModule
-  ],
-  providers: [],
+  providers: [ { provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
